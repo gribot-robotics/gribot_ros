@@ -28,7 +28,7 @@
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" />
 
-   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" /> -->
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
    
    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
 
