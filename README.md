@@ -40,8 +40,6 @@ If everything went well, you should be able to start gribot in typing the follow
 roslaunch gribot gribot.launch
 ```
 
-# How to participate
+# Contribution
 
-# Project  contributors
-
-* Guy Corbaz (guy@corbaz.org)
+<a href="https://github.com/guycorbaz/gribot/graphs/contributors"><img src="https://github.com/guycorbaz/gribot/graphs/contributors/contributord.svg?width=890" /> </a>
