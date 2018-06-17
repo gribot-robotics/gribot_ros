@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+   <!-- Values passed by command line input -->
+   <arg name="paused"       default="false" />
+   <arg name="use_sim_time" default="alse" />
+   <arg name="gui"          default="true" />
+   <arg name="headless"     default="false" />
+   <arg name="debug"        default="false" />
+
+
+   <!-- Launch file for gribot robot -->
+
+   <!-- Load robot description on Parameter Server -->
+   <!-- <param name="robot_description" textfile="$(find gribot)/urdf/gribot.urdf" /> -->
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/urdf/gribot.xacro" />
+   <param name="use_gui" value="$(arg gui)" />
+
+   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
+
+   <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="">
+      <rosparam command="load" file="$(find gribot)/config/can0.yaml" />
+   </node>
+
+</launch>
