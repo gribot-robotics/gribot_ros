@@ -1,12 +1,11 @@
 # Gribot
 
-Gribot is an agricultural robot mower that can cut grass in crops such as trees, grapes, etc. However,
+Gribot is an **open source agricultural robot mower** that can cut grass in crops such as trees, grapes, etc. All software, modules, plans, models, with the exception of purchased elements, are freely available under LGPL.
 Gribot is not only limited to agriculture: it can be used in every area where grass has to be periodically cut, such as 
 roadsides, industrial areas, etc.
 
-We are developpin more that just a mower: we are creating a platform that can carry many tools: in a frist step, we do focus on
+We are developping more that just a mower: we are creating a platform that can carry many tools: in a first step, we do focus on
 grass cutting.
-
 
 The project web site is www.gribot.org.
 
