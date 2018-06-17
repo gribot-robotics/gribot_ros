@@ -28,17 +28,22 @@
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" />
 
-
-   
-
-   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-
-   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-
    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" /> -->
+   
+   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+
+   <!-- Start robot state publisher -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+   </node>
 
    <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="">
       <rosparam command="load" file="$(find gribot)/config/can0.yaml" />
+   </node>
+
+   <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" >
+	<param name="dev" type="string" value="/dev/input/js0" />
+        <param name="deadzone" value="0.12" />
    </node>
 
 </launch>
