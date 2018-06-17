@@ -112,6 +112,30 @@
       <turnGravityOff>false</turnGravityOff>
    </gazebo>
 
+   <!-- Skid Steering Drive for 4 wheel robot -->
+   <gazebo>
+      <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+         <updateRate>100</updateRate>
+         <robotNameSpace>/</robotNameSpace>
+         <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+         <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+         <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+         <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+         <wheelSeparation>0.4</wheelSeparation>
+         <wheelDiameter>0.32</wheelDiameter>
+         <robotBaseFrame>base_link</robotBaseFrame>
+         <torque>20</torque>
+         <topicName>cmd_vel</topicName>
+         <broadcastTF>false</broadcastTF>
+         <commandTopic>cms_vel</commandTopic>      <!-- default to avoid warning -->
+         <odometryTopic>odom</odometryTopic>       <!-- default to avoid warning -->
+         <odometryFrame>odom</odometryFrame>       <!-- default to avoid warning -->
+         <covariance_x>0.00100</covariance_x>      <!-- default to avoid warning -->
+         <covariance_y>0.00100</covariance_y>      <!-- default to avoid warning -->
+         <covariance_yaw>0.010000</covariance_yaw> <!-- default to avoid warning -->
+      </plugin>
+   </gazebo>
+
 <!-- Wheel Definition -->
    <wheel fb="front" lr="right" parent="base_link" translateX="0.2" translateY="${base_width/2+0.05}"       translateZ="-0.065" flipY="1"/>
    <wheel fb="front" lr="left"  parent="base_link" translateX="0.2" translateY="${-1*(base_width/2+0.05)}"  translateZ="-0.065" flipY="1"/>
