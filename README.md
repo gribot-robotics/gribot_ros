@@ -42,4 +42,6 @@ roslaunch gribot gribot.launch
 
 # Contribution
 
-<a href="https://github.com/guycorbaz/gribot/graphs/contributors"></a>
+Thank you to all the people who already contributed to Gribot.
+
+<a href="https://github.com/guycorbaz/gribot/graphs/contributors">Contributors</a>
