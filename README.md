@@ -42,4 +42,4 @@ roslaunch gribot gribot.launch
 
 # Contribution
 
-<a href="https://github.com/guycorbaz/gribot/graphs/contributors"><img src="https://github.com/guycorbaz/gribot/graphs/contributors/contributord.svg?width=890" /> </a>
+<a href="https://github.com/guycorbaz/gribot/graphs/contributors"></a>
