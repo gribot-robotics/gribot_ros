@@ -10,6 +10,13 @@ We are developping more that just a mower: we are creating a platform that can c
 
 The project web site is www.gribot.org.
 
+# How to support us
+
+there are several way to support our project.
+* You can register to participate in robot development.
+* You can fund our project in <a href="https://www.patreon.com/bePatron?u=11801662" data-patreon-widget-type="become-patron-button">becoming a Patron!</a>
+
+
 # Why gribot ?
 
 Maintenance of grass in agricultural crops such as vines or fruit trees, road and motorway borders,
