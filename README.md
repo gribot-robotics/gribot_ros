@@ -16,6 +16,8 @@ there are several way to support our project.
 * To participate, you can register via github of via <a href="https://gribot.org/i-would-like-to-participate/">Gribot</a> web site.
 * You can fund our project in <a href="https://www.patreon.com/bePatron?u=11801662" data-patreon-widget-type="become-patron-button">becoming a Patron!</a>
 
+In any case, do not hesitate to <a href="https://gribot.org/contact-us/">contact us</a> for any question or comment.
+
 
 # Why gribot ?
 
