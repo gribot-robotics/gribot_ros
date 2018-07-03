@@ -34,7 +34,7 @@ items such as motors, GPS modules, LIDAR , etc. Which are under the manufacturer
 
 # Getting started 
 
-Gribot is based on ROS Lunar. It does not work yes with ROS Melodic as some packages used by gribot have not yet been ported ( eg. ros_canopen).
+Gribot is based on ROS Lunar. At the present time, it does not work with ROS Melodic as some packages used by gribot have not yet been ported ( eg. ros_canopen).
 
 To use Gribot software, you have to do the following:
 
