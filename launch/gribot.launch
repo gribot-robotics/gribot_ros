@@ -4,7 +4,9 @@
 
 <launch>
 
+
    <!-- Values passed by command line input -->
+
    <arg name="paused"       default="false" />
    <arg name="use_sim_time" default="false" />
    <arg name="gui"          default="true" />
@@ -13,6 +15,7 @@
 
 
    <!-- We resume the logic in empty_world.launch -->
+
    <include file="$(find gazebo_ros)/launch/empty_world.launch">
       <arg name="debug"        value="$(arg debug)" />
       <arg name="gui"          value="$(arg gui)" />
@@ -21,22 +24,42 @@
       <arg name="headless"     value="$(arg headless)" />
    </include>
 
+
    <!-- Load robot description on Parameter Server -->
+
    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/urdf/gribot.xacro" />
    <param name="use_gui" value="$(arg gui)" />
 
+
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
+
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" />
+
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
    
+   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
 
-   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
-   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+   <!-- Start robot state publisher -->
 
-   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" /> -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+   </node>
+
+
+   <!-- Start CANOpen nodes for controlling motors -->
 
    <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="">
       <rosparam command="load" file="$(find gribot)/config/can0.yaml" />
    </node>
+
+
+   <!-- Start the joystick nodes -->
+
+   <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" >
+	<param name="dev" type="string" value="/dev/input/js0" />
+        <param name="deadzone" value="0.12" />
+   </node>
+
 
 </launch>
