@@ -6,6 +6,7 @@
 <xacro:property name="wheel_width"  value="0.1"  />
 <xacro:property name="wheel_mass"   value="2.7"  />  <!-- in kg -->
 
+
    <!-- Macro for calculating inertia of cylindric wheel -->
    <xacro:macro name="wheel_inertia" params="m r h">
       <inertia ixx="${ m * ( 3 * r*r + h*h ) / 12}" ixy="0" ixz="0"
@@ -13,11 +14,12 @@
                izz="${ m * r / 2}" />
    </xacro:macro>
 
+
    <xacro:macro name="wheel" params="fb lr parent translateX translateY translateZ flipY">
    <!-- fb: front, back; lr: left right -->
       <link name="${fb}_${lr}_wheel">
          <visual>
-            <origin xyz="0 0 0" rpy="${flipY*M_PI/2} 0 0"/>  <!-- make sure the wheel is in the correc position -->
+            <origin xyz="0 0 0" rpy="${flipY*M_PI/2} 0 0"/>  <!-- make sure the wheel is in the correct position -->
             <geometry>
                <cylinder length="${wheel_width}" radius="${wheel_radius}" />
             </geometry>
@@ -47,13 +49,16 @@
          <turnGravityOff>false</turnGravityOff>  
       </gazebo>
 
+
       <joint name="${fb}_${lr}_wheel_joint" type="continuous">
          <parent link="${parent}"/>
          <child link="${fb}_${lr}_wheel" />
          <origin xyz="${translateX} ${translateY} ${translateZ}" rpy="0 0 0" />
          <limit effort="1000" velocity="1000" />
+         <axis xyz="0 1 0" /> 
          <joint_properties damping="0.0" friction="0.0" />
       </joint>
+
 
       <!-- Transmission is important to link the joint and the controller -->
       <transmission name="${fb}_${lr}_wheel_joint_trans" >
@@ -61,8 +66,10 @@
          <joint name="${fb}_${lr}_wheel_joint" />
          <actuator name="${fb}_${lr}_wheel_joint_motor">
             <hardwareInterface>EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction> <!-- It is not true: we uses motor with gearbos and ration of 75 -->
+            <mechanicalReduction>1</mechanicalReduction> <!-- It is not true: we uses motor with gearbox and ration of 75 -->
          </actuator>
       </transmission>
    </xacro:macro>
+
+
 </robot>
