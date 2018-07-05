@@ -127,7 +127,7 @@
          <torque>20</torque>
          <topicName>cmd_vel</topicName>
          <broadcastTF>false</broadcastTF>
-         <commandTopic>cms_vel</commandTopic>      <!-- default to avoid warning -->
+         <commandTopic>cmd_vel</commandTopic>      <!-- default to avoid warning -->
          <odometryTopic>odom</odometryTopic>       <!-- default to avoid warning -->
          <odometryFrame>odom</odometryFrame>       <!-- default to avoid warning -->
          <covariance_x>0.00100</covariance_x>      <!-- default to avoid warning -->

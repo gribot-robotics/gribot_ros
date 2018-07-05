@@ -17,7 +17,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/gribot</url> -->
+  <url type="website">https://gribot.org</url> 
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -45,11 +45,11 @@
   <!--   <test_depend>gtest</test_depend> -->
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
+
+  <depend>roscpp</depend>
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>canopen_motor_node</build_depend>
-  <build_export_depend>canopen_motor_node</build_export_depend>
-  <exec_depend>canopen_motor_node</exec_depend>
-  <exec_depend>joy_node</exec_depend>
+  <depend>canopen_motor_node</depend>
+  <depend>joy_node</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
