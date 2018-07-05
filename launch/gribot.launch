@@ -33,7 +33,7 @@
 
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
 
-   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" />
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" /> 
 
    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
    
@@ -49,17 +49,17 @@
 
    <!-- Start CANOpen nodes for controlling motors -->
 
-   <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="">
-      <rosparam command="load" file="$(find gribot)/config/can0.yaml" />
-   </node>
+<!--   <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix=""> -->
+<!--      <rosparam command="load" file="$(find gribot)/config/can0.yaml" /> -->
+<!--   </node> -->
 
 
    <!-- Start the joystick nodes -->
 
-   <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" >
-	<param name="dev" type="string" value="/dev/input/js0" />
-        <param name="deadzone" value="0.12" />
-   </node>
+   <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" > 
+      <param name="dev" type="string" value="/dev/input/js0" /> 
+      <param name="deadzone" value="0.12" /> 
+  </node> 
 
 
 </launch>
