@@ -48,6 +48,7 @@
 
   <depend>roscpp</depend>
   <buildtool_depend>catkin</buildtool_depend>
+
   <depend>canopen_motor_node</depend>
   <depend>joy_node</depend>
 

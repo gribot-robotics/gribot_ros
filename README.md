@@ -4,10 +4,20 @@ Gribot is an **open source agricultural robot mower** that can cut grass in crop
 Gribot is not only limited to agriculture: it can be used in every area where grass has to be periodically cut, such as 
 roadsides, industrial areas, etc.
 
-We are developping more that just a mower: we are creating a platform that can carry many tools: in a first step, we do focus on
-grass cutting.
+We are developping more that just a mower: we are creating a platform that can carry many tools: in a first step, we do focus on grass cutting.
+
+# Project web site
 
 The project web site is www.gribot.org.
+
+# How to support us
+
+there are several way to support our project.
+* To participate, you can register via github of via <a href="https://gribot.org/i-would-like-to-participate/">Gribot</a> web site.
+* You can fund our project in <a href="https://www.patreon.com/bePatron?u=11801662" data-patreon-widget-type="become-patron-button">becoming a Patron!</a>
+
+In any case, do not hesitate to <a href="https://gribot.org/contact-us/">contact us</a> for any question or comment.
+
 
 # Why gribot ?
 
@@ -24,7 +34,7 @@ items such as motors, GPS modules, LIDAR , etc. Which are under the manufacturer
 
 # Getting started 
 
-Gribot is based on ROS (at the time being Lunar version).
+Gribot is based on ROS Lunar. At the present time, it does not work with ROS Melodic as some packages used by gribot have not yet been ported ( eg. ros_canopen).
 
 To use Gribot software, you have to do the following:
 
