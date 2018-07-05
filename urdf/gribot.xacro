@@ -55,13 +55,13 @@
    <!-- base_footprint is a fictious link(frame) that is on the ground right below base_link origin -->
 
    <link name="base_footprint">
-      <inertial>
-         <mass value="0.0001" />
-         <origin xyz="0 0 0"  />
-         <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
-               iyy="0.0001" iyz="0.0"
-               izz="0.0001" />
-      </inertial>
+      <!-- <inertial> -->
+         <!-- <mass value="0.0001" /> -->
+         <!-- <origin xyz="0 0 0"  /> -->
+         <!-- <inertia ixx="0.0001" ixy="0.0" ixz="0.0" -->
+         <!--      iyy="0.0001" iyz="0.0" -->
+         <!--      izz="0.0001" /> -->
+      <!-- </inertial> -->
       <visual>
          <origin xzy="0 0 0" rpy="0 0 0" />
          <geometry>
@@ -110,6 +110,30 @@
    <gazebo reference="base_link">
       <material>Gazebo/White</material>
       <turnGravityOff>false</turnGravityOff>
+   </gazebo>
+
+   <!-- Skid Steering Drive for 4 wheel robot -->
+   <gazebo>
+      <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+         <updateRate>100</updateRate>
+         <robotNameSpace>/</robotNameSpace>
+         <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+         <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+         <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+         <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+         <wheelSeparation>0.4</wheelSeparation>
+         <wheelDiameter>0.32</wheelDiameter>
+         <robotBaseFrame>base_link</robotBaseFrame>
+         <torque>20</torque>
+         <topicName>cmd_vel</topicName>
+         <broadcastTF>false</broadcastTF>
+         <commandTopic>cmd_vel</commandTopic>      <!-- default to avoid warning -->
+         <odometryTopic>odom</odometryTopic>       <!-- default to avoid warning -->
+         <odometryFrame>odom</odometryFrame>       <!-- default to avoid warning -->
+         <covariance_x>0.00100</covariance_x>      <!-- default to avoid warning -->
+         <covariance_y>0.00100</covariance_y>      <!-- default to avoid warning -->
+         <covariance_yaw>0.010000</covariance_yaw> <!-- default to avoid warning -->
+      </plugin>
    </gazebo>
 
 <!-- Wheel Definition -->
