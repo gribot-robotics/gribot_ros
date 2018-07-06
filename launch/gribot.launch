@@ -31,16 +31,28 @@
    <param name="use_gui" value="$(arg gui)" />
 
 
+   <!-- very important for Joystick -->
+   <!-- defines which field contain which axe -->
+
+   <param name="axis_linear" value="1" type="int" />
+   <param name="axis_angular" value="0" type="int" />
+
+
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
 
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" /> 
 
+
+   <!-- Start rviz -->
+
    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
+
+   <!-- Start joint state publisher: publish the state of the joint -->
    
    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
 
 
-   <!-- Start robot state publisher -->
+   <!-- Start robot state publisher: publish the state of the robot -->
 
    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
       <param name="publish_frequency" type="double" value="50.0" />
@@ -59,7 +71,15 @@
    <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" > 
       <param name="dev" type="string" value="/dev/input/js0" /> 
       <param name="deadzone" value="0.12" /> 
-  </node> 
+   </node> 
+
+
+   <!-- Start link between joystick and robot -->
+
+   <node name="teleopjoy" pkg="gribot" type="teleopjoy" respawn="true" >
+      <param name="dev" type="string" value="/dev/input/js0" />
+      <param name="deadzone" value="0.12" />
+   </node>
 
 
 </launch>
