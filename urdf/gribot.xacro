@@ -139,6 +139,7 @@
       </plugin>
    </gazebo>
 
+
    <!-- Wheel Definition -->
    <wheel fb="front" lr="right" parent="base_link" translateX="0.2" translateY="${base_width/2+0.05}"       translateZ="-0.065" flipY="1"/>
    <wheel fb="front" lr="left"  parent="base_link" translateX="0.2" translateY="${-1*(base_width/2+0.05)}"  translateZ="-0.065" flipY="1"/>
@@ -146,7 +147,7 @@
    <wheel fb="back"  lr="left"  parent="base_link" translateX="-0.2" translateY="${-1*(base_width/2+0.05)}" translateZ="-0.065" flipY="1"/>
 
 
-   <!-- Lidar hokuyo -->
+   <!-- Lidar -->
 
    <link name="lidar_link" >
       <collision>
@@ -178,17 +179,19 @@
 
 
    <gazebo reference="lidar_link" >
-      <sensor type="gpu_ray" name="lidar_sensor">
+      <sensor type="ray" name="lidar_sensor">
          <pose>0 0 0 0 0 0</pose>
-         <visualize>false</visualize>
+         <visualize>true</visualize>
          <update_rate>40</update_rate>
          <ray>
             <scan>
                <horizontal>
                   <samples>720</samples>
                   <resolution>1</resolution>
-                  <min_angle>-1.570796</min_angle>
-                  <max_angle>1.570796</max_angle>
+                  <!-- <min_angle>-1.570796</min_angle> -->
+                  <!-- <max_angle>1.570796</max_angle> -->
+                  <min_angle>-3.141592</min_angle>
+                  <max_angle>3.141592</max_angle>
                </horizontal>
             </scan>
             <range>
@@ -202,7 +205,7 @@
                <stddev>0.01</stddev>
             </noise>
          </ray>
-         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
             <topicName>/robot/laser/scan</topicName>
             <frameName>lidar_link</frameName>
          </plugin>
