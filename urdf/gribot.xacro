@@ -179,7 +179,7 @@
 
 
    <gazebo reference="lidar_link" >
-      <sensor type="gpu_ray" name="lidar_sensor">
+      <sensor type="ray" name="lidar_sensor">
          <pose>0 0 0 0 0 0</pose>
          <visualize>true</visualize>
          <update_rate>40</update_rate>
@@ -205,7 +205,7 @@
                <stddev>0.01</stddev>
             </noise>
          </ray>
-         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
             <topicName>/robot/laser/scan</topicName>
             <frameName>lidar_link</frameName>
          </plugin>
