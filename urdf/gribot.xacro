@@ -63,7 +63,7 @@
    </gazebo>
 
 
-   <joint name="base_footprint_joint" type="fixed">
+   <joint name="glue_robot_to_world" type="fixed">
       <origin xyz="0 0 0.1" rpy="0 0 0" />
       <parent link="base_footprint" />
       <child link="base_link" />
