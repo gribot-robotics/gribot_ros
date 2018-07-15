@@ -158,7 +158,7 @@
    </link>
 
 
-   <joint name="lidat_to_base" type="fixed" >
+   <joint name="lidar_to_base" type="fixed" >
       <origin xyz="0 0 ${base_height/2+0.05}" rpy="0 0 0" />
       <parent link="base_link" />
       <child link="lidar_link" />
