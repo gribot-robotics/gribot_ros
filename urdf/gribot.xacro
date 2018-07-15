@@ -51,34 +51,21 @@
    </xacro:macro>
 
 
-   <!-- Base footprint -->
-   <!-- base_footprint is a fictious link(frame) that is on the ground right below base_link origin -->
+   <!-- World link -->
+   <!-- world_link is a fictious link(frame) that is on the ground right below base_link origin -->
 
-   <link name="base_footprint">
-      <!-- <inertial> -->
-         <!-- <mass value="0.0001" /> -->
-         <!-- <origin xyz="0 0 0"  /> -->
-         <!-- <inertia ixx="0.0001" ixy="0.0" ixz="0.0" -->
-         <!--      iyy="0.0001" iyz="0.0" -->
-         <!--      izz="0.0001" /> -->
-      <!-- </inertial> -->
-      <visual>
-         <origin xzy="0 0 0" rpy="0 0 0" />
-         <geometry>
-            <box size="0.001 0.001 0.001" />
-         </geometry>
-      </visual>
+   <link name="world_link">
    </link>
 
 
-   <gazebo reference="base_footprint">
+   <gazebo reference="world_link">
       <turnGravityOff>false</turnGravityOff>
    </gazebo>
 
 
-   <joint name="base_footprint_joint" type="fixed">
+   <joint name="glue_robot_to_world" type="fixed">
       <origin xyz="0 0 0.1" rpy="0 0 0" />
-      <parent link="base_footprint" />
+      <parent link="world_link" />
       <child link="base_link" />
    </joint>
 
