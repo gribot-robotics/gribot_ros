@@ -49,7 +49,7 @@
 
    <!-- Start joint state publisher: publish the state of the joint -->
    
-   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+<!--   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> -->
 
 
    <!-- Start robot state publisher: publish the state of the robot -->
