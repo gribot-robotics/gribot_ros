@@ -70,9 +70,12 @@ void TeleopJoy::callBack(const sensor_msgs::Joy::ConstPtr& joy)
 int main(int argc, char **argv)
 {
 
-  ROS_INFO("Starting teleopjoy"); 
+   ROS_INFO("Starting teleopjoy");
    ros::init(argc, argv, "teleopjoy");
    TeleopJoy teleop_gribot;
    ros::spin();
+
+   // We should never reach this, except if roscore stop.
+   ROS_WARN("Stopping teleopjoy");
    return 0;
 }
