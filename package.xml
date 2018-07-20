@@ -51,6 +51,7 @@
 
   <depend>canopen_motor_node</depend>
   <depend>joy_node</depend>
+  <depend>robot_state_publisher</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
