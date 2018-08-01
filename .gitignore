@@ -1,0 +1,5 @@
+# List of file that should not be included in git
+
+# eclipse
+.project
+.cproject
