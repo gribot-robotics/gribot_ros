@@ -87,6 +87,7 @@
    
    <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" respawn="true">
       <remap from="scan" to="base_scan" />
+      <param name="maxUrange" value="30.0" />
    </node>
 
 
