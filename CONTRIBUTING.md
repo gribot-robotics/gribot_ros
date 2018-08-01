@@ -2,7 +2,7 @@ Hi! I’m really excited that you are interested in contributing to Gribot. Befo
 - [Code of Conduct](https://github.com/guycorbaz/gribot/blob/master/CODE_OF_CONDUCT.md)
 - [Issue Reporting Guidelines](#issue-reporting-guidelines)
 - [Pull Request Guidelines](#pull-request-guidelines)
-- [Project Structure](#project-structure)
+- [Project Structure](https://github.com/guycorbaz/gribot/blob/master/CONTRIBUTING.md#project-structure)
 
 ## Issue Reporting Guidelines
 
@@ -33,6 +33,6 @@ Hi! I’m really excited that you are interested in contributing to Gribot. Befo
   ## Financial contribution
   
   As a pure community-driven project without major corporate backing, we also welcome financial contributions via
-   [Gribot donation page](https://gribot.org/donations/donation/).
+   <a href="https://www.patreon.com/bePatron?u=11801662" data-patreon-widget-type="become-patron-button">Patreon</a>.
    
    All funds will be used exclusively for the development of the [Gribot](https://www.gribot.org) project.
