@@ -18,7 +18,6 @@ there are several way to support our project.
 
 In any case, do not hesitate to <a href="https://gribot.org/contact-us/">contact us</a> for any question or comment.
 
-
 # Why gribot ?
 
 Maintenance of grass in agricultural crops such as vines or fruit trees, road and motorway borders,
@@ -31,6 +30,12 @@ wire of delimitation.
 We want to accelerate the transition to sustainable development, which is why we distribute all the
 plans and software of our robot under GNU General Public License (GPL), except for ready-made
 items such as motors, GPS modules, LIDAR , etc. Which are under the manufacturer's license.
+
+# Project status
+
+At the time being, it is possible to start playing with the simulator based on gazebo. It gives an idea of the eay Gribot should behave.
+
+The master branch contains a working system. All development are made in dev branch (or other if necessary), and are merged into master only when they have been tested.
 
 # Getting started 
 
