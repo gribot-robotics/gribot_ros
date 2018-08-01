@@ -21,11 +21,14 @@ Hi! I’m really excited that you are interested in contributing to Gribot. Befo
   
   ## Project structure
   
-    - **`config`**: contains configuration files for the different nodes used by Gribot
-    - **`launch`**: contains gribot lauch files
-    - **`scripts`**: contains scripts used by the different modules. Example: the CANbus starting script
+    - **`includes`**: Contains includes files.
+    - **`config`**: contains configuration files for the different nodes used by Gribot.
+    - **`launch`**: contains gribot lauch files.
+    - **`scripts`**: contains scripts used by the different modules. Example: the CANbus starting script.
+    - **`src`**: contains Gribot nodes source code files.
     - **`urdf`**: contains the robot description files in urdf and/or xacro format.
-    - **`src`**: contains Gribot nodes source code files
+    - **`worlds`**: contains different worlds used for simulation. The access path to these worlds has to be configured un Gazebo.
+    
     
   ## Financial contribution
   
