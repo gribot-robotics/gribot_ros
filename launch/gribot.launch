@@ -47,16 +47,17 @@
 
    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
 
-   <!-- Start joint state publisher: publish the state of the joint -->
-   
-<!--   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> -->
-
 
    <!-- Start robot state publisher: publish the state of the robot -->
 
    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
       <param name="publish_frequency" type="double" value="50.0" />
+      <!-- <param name="use_tf_static" value="false" /> -->
    </node>
+   
+   
+   <!-- Start the robot joint state publisher -->
+   <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 
 
    <!-- Start CANOpen nodes for controlling motors -->
@@ -79,6 +80,13 @@
    <node name="teleopjoy" pkg="gribot" type="teleopjoy" respawn="true" >
       <param name="dev" type="string" value="/dev/input/js0" />
       <param name="deadzone" value="0.12" />
+   </node>
+   
+   
+   <!-- Start gmapping -->
+   
+   <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" respawn="true">
+      <remap from="scan" to="base_scan" />
    </node>
 
 
