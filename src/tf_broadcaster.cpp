@@ -40,7 +40,7 @@ int main(int argc, char** argv)
    {
    }
 
-   ROS_WARN("tf_publisher stopped")
+   ROS_WARN("tf_publisher stopped");
    exit(0);
 }
 
