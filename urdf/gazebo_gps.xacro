@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<robot name="gazebo_gps" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ 
+   
+   <!-- Gazebo GPS simulator (GNSS) -->
+
+   <gazebo>
+      <plugin name="gps_sim" filename="libhector_gazebo_ros_gps.so">
+         <alwaysOn>1</alwaysOn>
+         <robotNamespace>/</robotNamespace>
+         <updateRate>10.0</updateRate>	<!-- Upate rate of sensor in ms -->
+         <bodyName>base_link</bodyName>	<!-- Name of the body the GNSS is attached to -->
+         <topicName>fix</topicName>
+         <referenceLatitude>46.5616</referenceLatitude>	<!-- latitude of the reference point (default 49.9) -->
+         <referenceLongitude>6.5395</referenceLongitude><!-- longitude of the reference point (default 8.9) -->
+         <velocityTopicName>fix_velocity</velocityTopicName>
+         <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+         <velocityDrift>0 0 0</velocityDrift>
+         <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+      </plugin>
+   </gazebo>
+</robot>
