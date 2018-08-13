@@ -58,22 +58,22 @@
 
 
    <!-- World link -->
-   <!-- world_link is a fictious link(frame) that is on the ground right below base_link origin -->
+   <!-- base_footprint is a fictious link(frame) that is on the ground right below base_link origin -->
    <!-- It is necessary as gazebo does not support inertia for the root link -->
    <!-- Do not call it world as it is reserved for robot that must be fixed to the world -->
 
-   <link name="world_link">
+   <link name="base_footprint">
    </link>
 
 
-   <gazebo reference="world_link">
+   <gazebo reference="base_footprint">
       <turnGravityOff>false</turnGravityOff>
    </gazebo>
 
 
    <joint name="glue_robot_to_world" type="fixed">
       <origin xyz="0 0 0.1" rpy="0 0 0" />
-      <parent link="world_link" />
+      <parent link="base_footprint" />
       <child link="base_link" />
    </joint>
 

@@ -8,7 +8,7 @@
    <!-- Values passed by command line input -->
 
    <arg name="paused"       default="false" />
-   <arg name="use_sim_time" default="false" />
+   <arg name="use_sim_time" default="true" />
    <arg name="gui"          default="true" />
    <arg name="headless"     default="false" />
    <arg name="debug"        default="false" />
@@ -52,7 +52,7 @@
 
    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
       <param name="publish_frequency" type="double" value="50.0" />
-      <!-- <param name="use_tf_static" value="false" /> -->
+      <param name="use_tf_static" value="false" />
    </node>
    
    
@@ -75,7 +75,7 @@
    </node> 
 
 
-   <!-- Start link between joystick and robot -->
+   <!-- Start the joystick node transformer -->
 
    <node name="teleopjoy" pkg="gribot" type="teleopjoy" respawn="true" >
       <param name="dev" type="string" value="/dev/input/js0" />
