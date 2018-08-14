@@ -122,7 +122,7 @@
          <rightRearJoint>back_right_wheel_joint</rightRearJoint>
          <wheelSeparation>0.4</wheelSeparation>
          <wheelDiameter>0.32</wheelDiameter>
-         <robotBaseFrame>base_link</robotBaseFrame>
+         <robotBaseFrame>base_footprint</robotBaseFrame>
          <torque>10</torque>
          <topicName>cmd_vel</topicName>
          <broadcastTF>true</broadcastTF>  <!-- Must be true or gmapping does not work in simulation environment -->
@@ -230,7 +230,7 @@
       <!-- <plugin name="gps_sim" filename="libhector_gazebo_ros_gps.so"> -->
          <!-- <alwaysOn>1</alwaysOn> -->
          <!-- <updateRate>10.0</updateRate> -->
-         <!-- <bodyName>base_link</bodyName> -->
+         <!-- <bodyName>base_footprint</bodyName> -->
          <!-- <topicName>fix</topicName> -->
          <!-- <velocityTopicName>fix_velocity</velocityTopicName> -->
          <!-- <drift>5.0 5.0 5.0</drift> -->
@@ -239,5 +239,25 @@
          <!-- <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise> -->
       <!-- </plugin> -->
    <!-- </gazebo> -->
+   
+   <gazebo>
+      <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+         <alwaysOn>true</alwaysOn>
+         <bodyName>base_footprint</bodyName>
+         <topicName>imu</topicName>
+         <serviceName>imu_service</serviceName>
+         <gaussianNoise>0.0</gaussianNoise>
+         <updateRate>20.0</updateRate>
+      </plugin>
+   </gazebo>
+  
+  
+   <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+         <robotNamespace>/mybot</robotNamespace>
+         <legacyModeNS>true</legacyModeNS>
+      </plugin>
+   </gazebo>
+
 
 </robot>
