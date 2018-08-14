@@ -61,8 +61,8 @@ TeleopJoy::TeleopJoy()
 void TeleopJoy::callBack(const sensor_msgs::Joy::ConstPtr& joy)
 {
    geometry_msgs::Twist vel;					// Used to publish data
-   vel.angular.z = -2*joy->axes[i_velAngular];  // Factor 2 required to increase angular speed, negative sign see below
-   vel.linear.x = -1*joy->axes[i_velLinear];    // Negative sign required to correct joytisk inversion
+   vel.angular.z = -2*joy->axes[i_velAngular];  // Factor 2 required to increase angular speed
+   vel.linear.x = 1*joy->axes[i_velLinear];
    pub.publish(vel);							// The topic is published
 }
 
