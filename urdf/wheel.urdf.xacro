@@ -16,6 +16,7 @@
 
 
    <xacro:macro name="wheel" params="fb lr parent translateX translateY translateZ flipY">
+     
    <!-- fb: front, back; lr: left right -->
       <link name="${fb}_${lr}_wheel">
          <visual>
@@ -57,18 +58,23 @@
          <limit effort="1000" velocity="1000" />
          <axis xyz="0 1 0" /> 
          <joint_properties damping="0.0" friction="0.0" />
+         <type>transmission_interface/SimpleTransmission</type>
       </joint>
 
 
       <!-- Transmission is important to link the joint and the controller -->
+      
       <transmission name="${fb}_${lr}_wheel_joint_trans" >
          <type>transmission_interface/SimpleTransmission</type>
-         <joint name="${fb}_${lr}_wheel_joint" />
+         <joint name="${fb}_${lr}_wheel_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+         </joint>
          <actuator name="${fb}_${lr}_wheel_joint_motor">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction> <!-- It is not true: we uses motor with gearbox and ration of 75 -->
          </actuator>
       </transmission>
+          
    </xacro:macro>
 
 
