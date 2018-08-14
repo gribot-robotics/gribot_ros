@@ -8,7 +8,7 @@
    <!-- Values passed by command line input -->
 
    <arg name="paused"       default="false" />
-   <arg name="use_sim_time" default="false" />
+   <arg name="use_sim_time" default="true" />
    <arg name="gui"          default="true" />
    <arg name="headless"     default="false" />
    <arg name="debug"        default="false" />
@@ -87,12 +87,10 @@
    <!-- Start gmapping -->
    
    <include file="$(find gribot)/launch/include/slam_gmapping.launch" />
+
+
+   <!-- Start move_base -->
    
-   <!-- <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" respawn="true"> -->
-      <!-- <remap from="scan" to="base_scan" /> -->
-      <!-- <param name="maxUrange" value="30.0" /> -->
-      <!-- <param name="base_frame" value="base_link" /> -->
-   <!-- </node> -->
-
-
+   <include file="$(find gribot)/launch/include/move_base.launch" />
+   
 </launch>
