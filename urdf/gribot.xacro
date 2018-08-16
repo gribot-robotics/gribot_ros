@@ -34,7 +34,7 @@
    <!-- Main body length height width -->
    
    <xacro:property name="base_height"   value="0.25" /> <!-- in meter -->
-   <xacro:property name="base_width"    value="0.6"  /> <!-- in meter -->
+   <xacro:property name="base_width"    value="0.52"  /> <!-- in meter -->
    <xacro:property name="base_lenght"   value="0.8"  /> <!-- in meter -->
    <xacro:property name="base_mass"     value="20.0" /> <!-- in kg -->
 
@@ -62,26 +62,26 @@
    <!-- It is necessary as gazebo does not support inertia for the root link -->
    <!-- Do not call it world as it is reserved for robot that must be fixed to the world -->
 
-   <link name="base_footprint">
+   <link name="base_link">
    </link>
 
 
-   <gazebo reference="base_footprint">
+   <gazebo reference="base_link">
       <turnGravityOff>false</turnGravityOff>
    </gazebo>
 
 
    <joint name="glue_robot_to_world" type="fixed">
       <origin xyz="0 0 0.1" rpy="0 0 0" />
-      <parent link="base_footprint" />
-      <child link="base_link" />
+      <parent link="base_link" />
+      <child link="chassis" />
    </joint>
 
 
    <!-- Base link -->
    <!-- Actual body/chassis of the robot -->
 
-   <link name="base_link">
+   <link name="chassis">
       <inertial>
          <mass value="${base_mass}" />
          <!-- the3x3 rotational inertia matrix -->
@@ -104,7 +104,7 @@
    </link>
 
 
-   <gazebo reference="base_link">
+   <gazebo reference="chassis">
       <material>Gazebo/White</material>
       <turnGravityOff>false</turnGravityOff>
    </gazebo>
@@ -122,7 +122,7 @@
          <rightRearJoint>back_right_wheel_joint</rightRearJoint>
          <wheelSeparation>0.4</wheelSeparation>
          <wheelDiameter>0.32</wheelDiameter>
-         <robotBaseFrame>base_footprint</robotBaseFrame>
+         <robotBaseFrame>base_link</robotBaseFrame>
          <torque>10</torque>
          <topicName>cmd_vel</topicName>
          <broadcastTF>true</broadcastTF>  <!-- Must be true or gmapping does not work in simulation environment -->
@@ -138,10 +138,10 @@
    
    <!-- Wheel Definition for simulation -->
    
-   <wheel fb="front" lr="right" parent="base_link" translateX="0.2" translateY="${base_width/2+0.05}"       translateZ="-0.065" flipY="1"/>
-   <wheel fb="front" lr="left"  parent="base_link" translateX="0.2" translateY="${-1*(base_width/2+0.05)}"  translateZ="-0.065" flipY="1"/>
-   <wheel fb="back"  lr="right" parent="base_link" translateX="-0.2" translateY="${base_width/2+0.05}"      translateZ="-0.065" flipY="1"/>
-   <wheel fb="back"  lr="left"  parent="base_link" translateX="-0.2" translateY="${-1*(base_width/2+0.05)}" translateZ="-0.065" flipY="1"/>
+   <wheel fb="front" lr="right" parent="chassis" translateX="0.2" translateY="${-1*(base_width/2+0.04)}"       translateZ="-0.065" flipY="1"/>
+   <wheel fb="front" lr="left"  parent="chassis" translateX="0.2" translateY="${1*(base_width/2+0.04)}"  translateZ="-0.065" flipY="1"/>
+   <wheel fb="back"  lr="right" parent="chassis" translateX="-0.2" translateY="${-1*(base_width/2+0.04)}"      translateZ="-0.065" flipY="1"/>
+   <wheel fb="back"  lr="left"  parent="chassis" translateX="-0.2" translateY="${1*(base_width/2+0.04)}" translateZ="-0.065" flipY="1"/>
 
 
    <!-- Lidar definition for simulation -->
@@ -169,8 +169,8 @@
 
 
    <joint name="lidar_to_base" type="fixed" >
-      <origin xyz="0 0 ${base_height/2+0.05}" rpy="0 0 0" />
-      <parent link="base_link" />
+      <origin xyz="0.3 0 ${base_height/2+0.05}" rpy="0 0 0" />
+      <parent link="chassis" />
       <child link="sweep_link" />
    </joint>
 
@@ -179,7 +179,7 @@
       <sensor type="ray" name="laser">
          <pose>0 0 0 0 0 0</pose>
          <visualize>false</visualize>	<!-- temporary for testing, but should be put to false -->
-         <update_rate>40</update_rate>
+         <update_rate>100</update_rate> <!-- rate at wich the sensor updates informations -->
          <ray>
             <scan>
                <horizontal>
@@ -240,16 +240,16 @@
       <!-- </plugin> -->
    <!-- </gazebo> -->
    
-   <gazebo>
-      <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
-         <alwaysOn>true</alwaysOn>
-         <bodyName>base_footprint</bodyName>
-         <topicName>imu</topicName>
-         <serviceName>imu_service</serviceName>
-         <gaussianNoise>0.0</gaussianNoise>
-         <updateRate>20.0</updateRate>
-      </plugin>
-   </gazebo>
+   <!-- <gazebo> -->
+      <!-- <plugin name="imu_plugin" filename="libgazebo_ros_imu.so"> -->
+         <!-- <alwaysOn>true</alwaysOn> -->
+         <!-- <bodyName>base_footprint</bodyName> -->
+         <!-- <topicName>imu</topicName> -->
+         <!-- <serviceName>imu_service</serviceName> -->
+         <!-- <gaussianNoise>0.0</gaussianNoise> -->
+         <!-- <updateRate>20.0</updateRate> -->
+      <!-- </plugin> -->
+   <!-- </gazebo> -->
   
   
    <gazebo>

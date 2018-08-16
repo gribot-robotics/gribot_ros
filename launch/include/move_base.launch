@@ -13,6 +13,7 @@
       <rosparam file="$(find gribot)/config/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find gribot)/config/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find gribot)/config/base_local_planner_params.yaml" command="load" />
+      <param name="controller_frequency" type="double" value="10" /> <!-- Default value is 20Hz -->
    </node>
 
 </launch>
