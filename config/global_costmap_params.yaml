@@ -1,7 +1,0 @@
-global_costmap:
-   global_frame: map
-   robot_base_frame: base_link
-   update_frequency: 2.0
-   publish_frequency: 1.0
-   # if map server is used, set to true
-   static_map: true

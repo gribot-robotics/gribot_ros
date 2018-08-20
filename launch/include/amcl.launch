@@ -7,7 +7,7 @@
 
    <node pkg="amcl" type="amcl" respawn="false" name="amcl" output="screen">
       <remap from="scan" to="base_scan" />
-      <param name="base_frame" value="base_link" />
+      <param name="base_frame" value="sweep_link" />
       <param name="laser_min_range" value="0.1" />
       <param name="laser_max_range" value="30.0" />
    </node>

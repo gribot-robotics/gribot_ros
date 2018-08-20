@@ -4,16 +4,35 @@
 
 <launch>
 
+   <arg name="odom_topic" default="odom" />
+
 
    <!-- Run the navigation -->
    
    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-      <rosparam file="$(find gribot)/config/common_costmap_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find gribot)/config/common_costmap_params.yaml" command="load" ns="local_costmap" />
-      <rosparam file="$(find gribot)/config/local_costmap_params.yaml" command="load" />
+   
+      <!-- Common parameters of global costmap -->
+      <rosparam file="$(find gribot)/config/move_base/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      
+      <!-- Common parameters of local costmap -->
+      <rosparam file="$(find gribot)config/move_base/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      
+      <!-- Local costmap parameters -->
+      <rosparam file="$(find gribot)/config/move_base/local_costmap_params.yaml" command="load" />
+      
+      <!-- Global costmap parameters -->
       <rosparam file="$(find gribot)/config/global_costmap_params.yaml" command="load" />
-      <rosparam file="$(find gribot)/config/base_local_planner_params.yaml" command="load" />
-      <param name="controller_frequency" type="double" value="10" /> <!-- Default value is 20Hz -->
+      
+      <!-- Base local planner parametersa -->
+      <rosparam file="$(find gribot)/config/move_base/base_local_planner_params.yaml" command="load" />
+      
+      <!-- dwa local planner parameters -->
+      <!-- <rosparam file="$(find gribot)/config/move_base/dwa_local_planner_params.yaml" command="load" /> -->
+      
+      <!-- move_base node parameters -->
+      <rosparam file="$(find gribot)/config/move_base/move_base_params.yaml" command="load" />
+      
+      <!-- <param name="controller_frequency" type="double" value="10" /> --> <!-- Default value is 20Hz -->
    </node>
 
 </launch>
