@@ -21,7 +21,7 @@
       <rosparam file="$(find gribot)/config/move_base/local_costmap_params.yaml" command="load" />
       
       <!-- Global costmap parameters -->
-      <rosparam file="$(find gribot)/config/global_costmap_params.yaml" command="load" />
+      <rosparam file="$(find gribot)/config/move_base/global_costmap_params.yaml" command="load" />
       
       <!-- Base local planner parametersa -->
       <rosparam file="$(find gribot)/config/move_base/base_local_planner_params.yaml" command="load" />
