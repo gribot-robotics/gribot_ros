@@ -12,9 +12,9 @@ The project web site is www.gribot.org.
 
 # How to support us
 
-there are several way to support our project.
-* To participate, you can register via github of via <a href="https://gribot.org/i-would-like-to-participate/">Gribot</a> web site.
-* You can fund our project in <a href="https://gribot.org/donations/support_us/"making a donation</a>  
+There are several way to support our project.
+* You can participate, just register via github of via <a href="https://gribot.org/i-would-like-to-participate/">Gribot</a> web site.
+* You can fund our project in <a href="https://gribot.org/donations/support_us/">making a donation</a>  
 
 In any case, do not hesitate to <a href="https://gribot.org/contact-us/">contact us</a> for any question or comment.
 
@@ -29,7 +29,7 @@ items such as motors, GPS modules, LIDAR , etc. Which are under the manufacturer
 
 # Project status
 
-At the time being, it is possible to start <a href="https://gribot.org/first-test-in-simulator/"playing</a> with the simulator based on gazebo.
+At the time being, it is possible to start <a href="https://gribot.org/first-test-in-simulator/">playing</a> with the simulator based on gazebo.
 It gives an idea of the eay Gribot should behave.
 A mechanical model is being designed, but needs improvements. 
 
