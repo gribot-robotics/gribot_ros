@@ -14,18 +14,14 @@ The project web site is www.gribot.org.
 
 there are several way to support our project.
 * To participate, you can register via github of via <a href="https://gribot.org/i-would-like-to-participate/">Gribot</a> web site.
-* You can fund our project in <a href="https://www.patreon.com/bePatron?u=11801662" data-patreon-widget-type="become-patron-button">becoming a Patron!</a>
+* You can fund our project in <a href="https://gribot.org/donations/support_us/"making a donation</a>  
 
 In any case, do not hesitate to <a href="https://gribot.org/contact-us/">contact us</a> for any question or comment.
 
 # Why gribot ?
 
-Maintenance of grass in agricultural crops such as vines or fruit trees, road and motorway borders,
-industrial zones, etc. Is mainly done with mowers, brush cutters, tractors and weed killers. Not only
-are these operations time-consuming and costly, but they also generate a lot of CO2 and use pollutants.
-That's why we want to automate these operations with an intelligent robot that can cut grass as close
-to crops, trees, walls, etc. as possible, using GPS location, among other things, to avoid installing a
-wire of delimitation.
+We would like to build an open source, modular and cost effective robotic platform for agriculture in collaborative mode,
+in order to reduce CO2 emissions of farmers, stop the use of toxic chemicals, simplify their live and optimize their production costs.
 
 We want to accelerate the transition to sustainable development, which is why we distribute all the
 plans and software of our robot under GNU General Public License (GPL), except for ready-made
@@ -33,7 +29,9 @@ items such as motors, GPS modules, LIDAR , etc. Which are under the manufacturer
 
 # Project status
 
-At the time being, it is possible to start playing with the simulator based on gazebo. It gives an idea of the eay Gribot should behave.
+At the time being, it is possible to start <a href="https://gribot.org/first-test-in-simulator/"playing</a> with the simulator based on gazebo.
+It gives an idea of the eay Gribot should behave.
+A mechanical model is being designed, but needs improvements. 
 
 The master branch contains a working system. All development are made in dev branch (or other if necessary), and are merged into master only when they have been tested.
 
