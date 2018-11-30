@@ -37,11 +37,11 @@ The master branch contains a working system. All development are made in dev bra
 
 # Getting started 
 
-Gribot is based on ROS Lunar. At the present time, it does not work with ROS Melodic as some packages used by gribot have not yet been ported ( eg. ros_canopen).
+Gribot has been moved to ROS melodic on Ubuntu 18.04.
 
 To use Gribot software, you have to do the following:
 
-1. Install a Ubuntu 16.04 server if not already done
+1. Install a Ubuntu 18.04 server if not already done
 2. Install ROS Lunar packages
 3. Create a catking working folder
 4. Clone gribot git folder
