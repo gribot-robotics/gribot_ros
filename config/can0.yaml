@@ -31,6 +31,6 @@ nodes:
       eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
    back_right_wheel_joint:
       # joints:
-      id: 11
+      id: 13
       eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
 
