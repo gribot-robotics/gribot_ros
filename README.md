@@ -42,7 +42,7 @@ Gribot has been moved to ROS melodic on Ubuntu 18.04.
 To use Gribot software, you have to do the following:
 
 1. Install a Ubuntu 18.04 server if not already done
-2. Install ROS Lunar packages
+2. Install ROS Melodic packages
 3. Create a catking working folder
 4. Clone gribot git folder
 
