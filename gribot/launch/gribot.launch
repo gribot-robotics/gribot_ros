@@ -45,19 +45,22 @@
    
    <!-- Start the joystick nodes -->
 
-   <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" > 
+   <!-- <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" > 
       <param name="dev" type="string" value="/dev/input/js0" /> 
       <param name="deadzone" value="0.12" /> 
-   </node> 
+   </node>  -->
 
 
    <!-- Start the joystick node transformer -->
 
-   <node name="teleopjoy" pkg="gribot" type="teleopjoy" respawn="true" >
+   <!-- <node name="teleopjoy" pkg="gribot" type="teleopjoy" respawn="true" >
       <param name="dev" type="string" value="/dev/input/js0" />
       <param name="deadzone" value="0.12" />
+   </node> -->
+   
+   <node name="key_teleop" pkg="key_teleop" type="key_teleop" output="screen">
+      <remap from="key_vel" to="cmd_vel"/>
    </node>
-
 
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
 
