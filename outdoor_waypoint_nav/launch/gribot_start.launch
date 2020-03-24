@@ -1,0 +1,88 @@
+<launch>
+
+    <!--Arguments for launching the nodes-->
+    <arg name="diagnostics_enabled" default="false"/>
+    <arg name="record_dianostics" default="$(optenv GRIBOT_BAG_DIAGNOSTICS false)"/>
+
+    <arg name="joystick_enabled" default="false"/>
+    <arg name="joystick_port" default="/dev/input/js0" />
+
+    <arg name="bag_enabled" default="$(optenv GRIBOT_BAG_ENABLED false)"/>
+    <arg name="bag_laser" default="$(optenv GRIBOT_BAG_LASER false)"/>
+    <arg name="bag_dir" default="$(optenv GRIBOT_BAG_DIR)"/>
+
+    <arg name="odrive_enabled" default="false"/>
+
+    <!-- <arg name="nav_enabled" default="$(optenv GRIBOT_NAV_ENABLED false)"/> -->
+    <!-- <arg name="nav_coords_path" default="$(optenv GRIBOT_COORDS_PATH)"/> -->
+    <arg name="monitor_wifi" default="false"/>
+
+    <arg name="simulate" default="true"/>
+    <arg name="sim_scene" value="orchard"/>
+    <arg name="gui" default="true"/>
+    <arg name="sim_x" default="-26.61"/>
+    <arg name="sim_y" default="37.017"/>
+    <arg name="sim_z" default="1.9073"/>
+
+    <!-- Start simulator if requested -->
+    <group if="$(arg simulate)">
+        <!-- Start gazebo with the requested scene -->
+        <include file="$(find gribot_gazebo)/launch/$(arg sim_scene).launch">
+            <arg name="gui" value="$(arg gui)"/>
+        </include>
+    </group>
+    
+    <group if="$(arg simulate)"> <!-- TODO: maybe combine this block with the previous if I don't need to move it further down the file! -->
+        <!-- Spawn a gribot to drive around in the simulator -->
+        <include file="$(find gribot_gazebo)/launch/spawn_gribot.launch">
+            <arg name="laser_enabled" value="true"/>
+            <arg name="x" value="$(arg sim_x)"/>
+            <arg name="y" value="$(arg sim_y)"/>
+            <arg name="z" value="$(arg sim_z)"/>
+        </include>
+    </group>
+
+    <!--Autonomous Navigation Stuff-->
+    <!--- Run Move Base -->  
+    <!-- TODO: currently move_base is enabled only for simulation; soon we'd like to be able to enable it on the real rover too -->
+    <!-- TODO: restore previous functionality of opening this in a separate terminal from the main simulation (using node launch-prefix) -->
+    <!-- <include if="$(arg simulate)" file="$(find gribot_navigation)/launch/move_base.launch">
+        <arg name="no_static_map" value="true"/>
+    </include> -->
+
+    <!-- Launches the PS4 joystick node -->
+
+    <!-- TODO: would like to do some work on merging sim/real behavior here -->
+    <group unless="$(arg simulate)">
+        <include file="$(find gribot_control)/launch/simple_drive.launch" if="$(arg joystick_enabled)" >
+          <arg name="joy_dev" value="$(arg joystick_port)"/>
+        </include>
+    </group>
+
+    <!-- <node name="key_teleop" pkg="key_teleop" type="key_teleop" output="screen">
+      <remap from="key_vel" to="cmd_vel"/>
+   </node> -->
+    
+    <!-- <group if="$(arg simulate)">
+        <include file="$(find outdoor_waypoint_nav)/launch/simulation/joy_launch_control_sim.launch">
+            <arg name="new_term" value="true"/>
+        </include>
+    </group> -->
+
+    <!-- Launches the ODrive node -->
+    <group unless="$(arg simulate)">
+        <include file="$(find odrive_ros)/launch/ODriveFB.launch" if="$(arg odrive_enabled)">
+        </include>
+    </group>
+
+    <!--Bag all of the data-->
+    <group if="$(arg bag_enabled)">
+        <include file="$(find outdoor_waypoint_nav)/launch/bag_data.launch">
+            <arg name="bag_dir" value="$(arg bag_dir)"/>
+            <arg name="record_laser" value="$(arg bag_laser)"/>
+            <arg name="record_diagnostics" value="$(arg record_dianostics)"/>
+            <arg name="monitor_wifi" value="$(arg monitor_wifi)"/>
+        </include>
+    </group>
+
+</launch>

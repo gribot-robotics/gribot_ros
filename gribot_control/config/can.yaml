@@ -1,0 +1,45 @@
+bus:
+  device: can0
+sync:
+  interval_ms: 10
+  overflow: 0
+heartbeat:
+  rate: 20
+  msg: "77f#05"
+
+  # 
+bus:
+   device: can0 # socketcan network
+   # loopback: false # socket should loop back messages
+   # driver_plugin: can::SocketCANInterface
+   master_allocator: canopen::SimpleMaster::Allocator # defaults to canopen::LocalMaster::Allocator
+sync:
+   interval_ms: 10 # set to 0 to desable sync
+   # update_ms: <interval_ms> # update interval of control loop, must be set explicitely 1 if sync is desabled
+   overflow: 0 # overflow sync counter at value or do not set it (0, default)
+heartbeat: # simple heartbeat producer, optional!
+   rate: 20 # heartbeat rate
+   msg: "77f#05" # message to send, cansend format: heartbeat of node 127 with status 5=Started
+#
+#
+#
+# defaults:
+   publish: ["1001!"]  # Error register 
+nodes:
+   front_left_wheel_joint:
+      # joints:
+      id: 10
+      eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
+   back_left_wheel_joint:
+      # joints:
+      id: 12
+      eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
+   front_right_wheel_joint:
+      # joints:
+      id: 11
+      eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
+   back_right_wheel_joint:
+      # joints:
+      id: 11
+      eds_file: /home/gcorbaz/catkin_ws/src/gribot/config/keya.eds
+

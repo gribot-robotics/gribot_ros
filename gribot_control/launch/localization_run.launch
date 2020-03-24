@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="simulate" default="$(optenv ROBOT_SIMULATION false)"/>
+  <arg name="odom0_topic" default="/odom"/>
+  <arg name="imu0_topic" default="/imu/data"/>
+  <arg name="gps0_topic" default="/navsat/fix"/>
+
+  <group ns="outdoor_waypoint_nav">
+    <rosparam command="load" subst_value="true" file="$(find gribot_control)/config/ekf_params.yaml"/>
+	<!-- TODO: make these as similar as possible; seems like it ought to be possible to merge these entirely through clever configuration of the simulator rather than needing different vehicle configs -->
+    <rosparam unless="$(arg simulate)" command="load" file="$(find outdoor_waypoint_nav)/params/navsat_params.yaml"/>
+    <rosparam if="$(arg simulate)" command="load" file="$(find outdoor_waypoint_nav)/params/navsat_params_sim.yaml"/>
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom"/>
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+      <remap from="odometry/filtered" to="$(arg odom0_topic)"/>
+    </node>
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true" output="screen">
+        <remap from="odometry/filtered" to="$(arg odom0_topic)"/>
+        <remap from="gps/fix" to="$(arg gps0_topic)"/>
+        <remap from="imu/data" to="$(arg imu0_topic)"/>
+    </node>
+  </group>
+
+</launch>

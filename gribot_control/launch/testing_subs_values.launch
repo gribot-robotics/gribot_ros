@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="odom0_topic" value="/mierda"/>
+  <arg name="imu0_topic" value="/imu/basura"/>
+  <arg name="gps0_topic" value="/navsat/barata"/>
+
+  <rosparam command="load" subst_value="true" file="$(find wolverine_control)/config/ekf_params.yaml" />
+
+</launch>

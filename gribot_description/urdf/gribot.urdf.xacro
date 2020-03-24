@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+
+\file      wolverine.urdf.xacro
+\authors   Andres Torres Garcia <mtg@milanotechnicalgroup.com>
+\copyright Copyright (c) 2019, Milano Technical Group, Inc., All rights reserved.
+-->
+<robot name="wolverine" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="M_PI" value="3.14159"/>
+
+  <xacro:arg name="laser_enabled" default="false" />
+  <!-- <xacro:arg name="laser_xyz" default="$(optenv WOLVERINE_LMS1XX_XYZ 0.2206 0.0 0.00635)" /> -->
+  <xacro:arg name="laser_xyz" default="$(optenv WOLVERINE_LMS1XX_XYZ 1.1900408 0.0 -0.0127)" />
+  <xacro:arg name="laser_rpy" default="$(optenv WOLVERINE_LMS1XX_RPY ${M_PI} 0.0 0.0)" />
+
+  <xacro:property name="wolverine_front_bumper_extend" value="$(optenv WOLVERINE_FRONT_BODY_EXTEND 0.7210897186)" />
+  <xacro:property name="wolverine_rear_bumper_extend" value="$(optenv WOLVERINE_REAR_BODY_EXTEND 0.1868169238)" />
+
+  <xacro:arg name="robot_namespace" default="/" />
+  <xacro:arg name="urdf_extras" default="empty.urdf" />
+
+  <!-- Included URDF/XACRO Files -->
+  <xacro:include filename="$(find wolverine_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro"/>
+  <xacro:include filename="$(find wolverine_description)/urdf/wheel.urdf.xacro" />
+
+  <!-- Base Size -->
+  <xacro:property name="base_x_size" value="1.564835453" />
+  <xacro:property name="base_y_size" value="1.905" />
+  <xacro:property name="base_z_size" value="0.6832454204" />
+
+  <!-- Wheel Mounting Positions -->
+  <xacro:property name="wheel_base_front" value="0.5792177392" />
+  <xacro:property name="wheel_base_rear" value="0.804021887" />
+  <xacro:property name="track" value="0.7626175356" />
+  <xacro:property name="wheel_vertical_offset" value="0.517525" />
+
+  <!-- Wheel Properties -->
+  <xacro:property name="wheel_length" value="0.1524" />
+  <xacro:property name="wheel_radius" value="0.19812" />
+
+  <!-- Base link is the center of the robot's bottom plate -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wolverine_description/meshes/Chassis_Assy_v2.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${( wolverine_front_bumper_extend - wolverine_rear_bumper_extend ) / 2.0} 0 ${base_z_size/2}" rpy="0 0 0" />
+      <geometry>
+        <box size="${ base_x_size + wolverine_front_bumper_extend + wolverine_rear_bumper_extend } ${base_y_size} ${base_z_size/4}"/>
+      </geometry>
+    </collision>
+    <!-- <collision>
+      <origin xyz="0 0 ${base_z_size*3/4-0.01}" rpy="0 0 0" />
+      <geometry>
+        <box size="${base_x_size*4/5} ${base_y_size} ${base_z_size/2-0.02}"/>
+      </geometry>
+    </collision> -->
+  </link>
+
+  <!-- Base footprint is on the ground under the robot -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 ${-wheel_vertical_offset - wheel_radius}" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_footprint" />
+  </joint>
+
+  <!-- Interial link stores the robot's inertial information -->
+  <link name="inertial_link">
+    <inertial>
+      <mass value="46.034" />
+      <origin xyz="-0.00065 -0.085 0.062" />
+      <inertia ixx="0.6022" ixy="-0.02364" ixz="-0.1197" iyy="1.7386" iyz="-0.001544" izz="2.0296" />
+    </inertial>
+  </link>
+
+  <joint name="inertial_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="inertial_link" />
+  </joint>
+
+  <!-- Wolverine wheel macros -->
+  <xacro:wolverine_wheel wheel_prefix="front_left">
+    <origin xyz="${wheel_base_front} ${track} ${-wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wolverine_wheel>
+  <xacro:wolverine_wheel wheel_prefix="front_right">
+    <origin xyz="${wheel_base_front} ${-track} ${-wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wolverine_wheel>
+  <xacro:wolverine_wheel wheel_prefix="rear_left">
+    <origin xyz="${-wheel_base_rear} ${track} ${-wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wolverine_wheel>
+  <xacro:wolverine_wheel wheel_prefix="rear_right">
+    <origin xyz="${-wheel_base_rear} ${-track} ${-wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:wolverine_wheel>
+
+  <xacro:if value="$(arg laser_enabled)">
+
+    <sick_lms1xx_mount prefix="base"/>
+
+    <sick_lms1xx frame="base_laser" topic="r2300_node/scan_0" robot_namespace="$(arg robot_namespace)"/>
+
+    <joint name="laser_mount_joint" type="fixed">
+      <origin xyz="$(arg laser_xyz)" rpy="$(arg laser_rpy)" />
+      <parent link="base_link" />
+      <child link="base_laser_mount" />
+    </joint>
+
+  </xacro:if>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>$(arg robot_namespace)</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>$(arg robot_namespace)</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>front/piksi/imu</topicName>
+      <!-- <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise> -->
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+      <robotNamespace>$(arg robot_namespace)</robotNamespace>
+      <updateRate>40</updateRate>
+      <bodyName>base_link</bodyName>
+      <frameId>base_link</frameId>
+      <topicName>front/piksi/navsat_best_fix</topicName>
+      <velocityTopicName>front/piksi/navsat_best_fix/vel</velocityTopicName>
+      <referenceLatitude>49.9</referenceLatitude>
+      <referenceLongitude>8.9</referenceLongitude>
+      <referenceHeading>0</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
+      <!-- this is std. dev. not var.-->
+      <!-- <gaussianNoise>0.01 0.01 0.1</gaussianNoise> -->
+      <!-- <drift>0.0001 0.0001 0.0001</drift> -->
+    </plugin>
+  </gazebo>
+
+  <!-- Optional custom includes. -->
+  <xacro:include filename="$(arg urdf_extras)" />
+
+</robot>

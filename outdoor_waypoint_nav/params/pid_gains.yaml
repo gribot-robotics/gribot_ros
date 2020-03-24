@@ -1,0 +1,9 @@
+gains:
+  left_wheel:
+    P: 10
+    I: 10
+    D: 0.001
+  right_wheel:
+    P: 10
+    I: 10
+    D: 0.001

@@ -1,0 +1,20 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="bag_enabled" default="false"/>
+    <arg name="bag_laser" default="false"/>
+    <arg name="bag_dir" default="$(optenv HUSKY_BAG_DIR)"/>
+
+    <!-- Launches the PS4 joystick node -->
+    <include file="$(find wolverine_control)/launch/simple_drive.launch" />
+    <!-- Launches the ODrive node -->
+    <include file="$(find odrive_ros)/launch/ODriveFB.launch" />
+
+    <!--Bag all of the data-->
+    <!-- <group if="$(arg bag_enabled)"> -->
+    <include file="$(find husky_master)/launch/launch_part/bag_data.launch">
+        <arg name="bag_dir" value="$(arg bag_dir)"/>
+        <arg name="bag_laser" value="$(arg bag_laser)"/>
+    </include>
+    <!-- </group> -->
+</launch>

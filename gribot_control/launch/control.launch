@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- <arg name="multimaster" default="$(optenv ROBOT_MULTIMASTER false)"/> -->
+  <arg name="simulation" default="$(optenv ROBOT_SIMULATION false)"/>
+  <arg name="robot_namespace" default="$(optenv ROBOT_NAMESPACE /)"/>
+
+  <!-- <arg name="config_extras" default="$(eval optenv('GRIBOT_CONFIG_EXTRAS', find('gribot_control') + '/config/empty.yaml'))"/> -->
+
+   <arg name="laser_enabled" default="$(optenv GRIBOT_LMS1XX_ENABLED true)"/>
+   <arg name="urdf_extras" default="$(optenv GRIBOT_URDF_EXTRAS)"/>
+
+   <!-- TODO: Need to change the value of these topics -->
+   <arg name="odom0_topic" default="odometry/filtered_map"/>
+   <arg name="imu0_topic" default="front/piksi/imu"/>
+   <arg name="gps0_topic" default="front/piksi/navsat_best_fix"/>
+
+   <!-- <include file="$(find multimaster_launch)/launch/multimaster_robot.launch" if="$(arg multimaster)">
+    <arg name="gazebo_interface" value="$(find gribot_control)/config/gazebo_interface.yaml" />
+    <arg name="public_interface" value="$(find gribot_control)/config/public_interface.yaml" />
+    <arg name="robot_namespace" value="$(arg robot_namespace)"/>
+    <arg name="simulation" value="$(arg simulation)"/>
+  </include> -->
+
+  <!-- Load robot description -->
+  <include file="$(find gribot_description)/launch/description.launch" >
+    <arg name="laser_enabled" default="$(arg laser_enabled)"/>
+    <arg name="urdf_extras" default="$(arg urdf_extras)"/>
+  </include>
+
+  <group if="$(arg simulation)">
+    <!-- Load controller configuration -->
+    <!-- <rosparam command="load" file="$(find gribot_control)/config/control.yaml" /> -->
+
+    <!-- Spawn controllers -->
+    <!-- <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="gribot_joint_publisher gribot_velocity_controller"/> -->
+
+      <!-- Launch robot_localization and navsat node-->
+      <!-- <include file="$(find gribot_control)/launch/localization_run.launch">
+        <arg name="simulate" value="$(arg simulation)"/>
+        <arg name="odom0_topic" value="$(arg odom0_topic)"/>
+        <arg name="imu0_topic" value="$(eval ('' if imu0_topic[0] == '/' else robot_namespace) +  imu0_topic)"/>
+        <arg name="gps0_topic" value="$(eval ('' if gps0_topic[0] == '/' else robot_namespace) + gps0_topic)"/>
+      </include> -->
+  </group>
+
+    <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <group if="$(arg simulation)">
+    <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+      <rosparam command="load" file="$(find gribot_control)/config/twist_mux.yaml" />
+      <!-- <remap from="cmd_vel_out" to="gribot_velocity_controller/cmd_vel"/> -->
+      <remap from="cmd_vel_out" to="cmd_vel"/>
+    </node>
+  </group>
+
+    <!-- Override the default control parameters, see config/empty.yaml for default. -->
+    <!-- <rosparam command="load" file="$(arg config_extras)" /> -->
+
+  </launch>

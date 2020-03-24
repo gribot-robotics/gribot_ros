@@ -1,0 +1,79 @@
+<!-- front right leg -->
+   <link name="front_right_leg">
+    <visual>
+      <geometry>
+        <mesh filename="package://wolverine_description/meshes/Legs_v1-Leg_F-R.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- You may need to change these values later -->
+  <xacro:property name="front_x" value="0.5792177392" />
+  <xacro:property name="front_y" value="0.7856654594" />
+  <xacro:property name="front_z" value="-0.327025" />
+
+  <xacro:property name="rear_x" value="0.8841678786" />
+  <xacro:property name="rear_y" value="0.66274685842" />
+  <xacro:property name="rear_z" value="0.277677245" />
+  <!-- <xacro:property name="rear_z" value="0.2809570454" /> -->
+
+  <xacro:property name="front_x_offset" value="0.3215304" />
+  <xacro:property name="front_y_offset" value="0.297275" />
+  <xacro:property name="front_z_offset" value="0.04386905" />
+
+  <xacro:property name="rear_x_offset" value="0.2571469" />
+  <xacro:property name="rear_y_offset" value="0.214804" />
+  <xacro:property name="rear_z_offset" value="0.04386905" />
+
+  <joint name="base_to_front_right_leg" type="fixed">
+    <!-- <origin xyz="${front_x - front_x_offset} ${-front_y - front_y_offset} ${-front_z + front_z_offset}"/> -->
+    <origin xyz="${front_x} ${-front_y} ${front_z}"/>
+    <parent link="base_link"/>
+    <child link="front_right_leg"/>
+  </joint>
+
+  <!-- front left leg -->
+  <link name="front_left_leg">
+    <visual>
+      <geometry>
+        <mesh filename="package://wolverine_description/meshes/Legs_v1-Leg_F-L.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_front_left_leg" type="fixed">
+    <!-- <origin xyz="${front_x - front_x_offset} ${front_y + front_y_offset} ${-front_z + front_z_offset}"/> -->
+    <origin xyz="${front_x} ${front_y} ${front_z}"/>
+    <parent link="base_link"/>
+    <child link="front_left_leg"/>
+  </joint>
+
+  <!-- rear right leg -->
+  <link name="rear_right_leg">
+    <visual>
+      <geometry>
+        <mesh filename="package://wolverine_description/meshes/Legs_v1-Leg_R-R.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_rear_right_leg" type="fixed">
+    <origin xyz="${-rear_x + rear_x_offset} ${-rear_y - rear_y_offset} ${-rear_z + rear_z_offset}"/>
+    <parent link="base_link"/>
+    <child link="rear_right_leg"/>
+  </joint>
+
+  <!-- rear left leg -->
+  <link name="rear_left_leg">
+    <visual>
+      <geometry>
+        <mesh filename="package://wolverine_description/meshes/Legs_v1-Leg_R-L.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_rear_left_leg" type="fixed">
+    <origin xyz="${-rear_x + rear_x_offset} ${rear_y + rear_y_offset} ${-rear_z + rear_z_offset}"/>
+    <parent link="base_link"/>
+    <child link="rear_left_leg"/>
+  </joint>

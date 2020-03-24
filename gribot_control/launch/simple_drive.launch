@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- <arg name="two_joys" default="false"/> -->
+
+    <arg name="joy_config" default="F710" />
+    <arg name="joy_dev" default="/dev/input/js0" />
+
+    <!-- <group unless="$(arg two_joys)"> -->
+    <group ns="one_joy">
+
+      <node pkg="odrive_ros" type="const_vel_joy.py" name="const_vel_joy" output="screen"/>
+
+      <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+        <param name="dev" value="$(arg joy_dev)" />
+        <param name="deadzone" value="0.3" />
+        <param name="autorepeat_rate" value="20" />
+      </node>
+
+      <arg name="config_F710" default="$(find wolverine_control)/config/teleop_$(arg joy_config).yaml" />
+
+      <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen">
+        <rosparam command="load" file="$(arg config_F710)" />
+        <!-- <remap from="cmd" to="/cmd_vel"> -->
+      </node>
+
+    </group>
+
+    <!-- 0 + (10.0 - x) -->
+    
+    <!-- 43.47826087*X=850
+
+    LT = 2, 1.0/-1.0
+    RT = 5, 1.0/-1.0 -->
+
+    <!-- <group if="$(arg two_joys)"> -->
+    <group ns="two_triggers">
+
+      <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+        <param name="dev" value="$(arg joy_dev)" />
+        <param name="deadzone" value="0.0001" />
+        <param name="autorepeat_rate" value="20" />
+      </node>
+
+      <!-- Change range from 1.0/-1.0 to 0.0/20.0 -->
+      <node pkg="odrive_ros" type="joy_range_change.py" name="joy_range" output="screen" />
+
+      <arg name="config_F710_left_side" default="$(find wolverine_control)/config/left_side_teleop_$(arg joy_config).yaml" />
+      <!-- <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen" ns="right_side">
+        <rosparam command="load" file="$(arg config_F710_left_side)" />
+        <remap from="joy" to="/joy_changed"/>
+      </node> -->
+      <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen" ns="left_side">
+        <rosparam command="load" file="$(arg config_F710_left_side)" />
+        <remap from="joy" to="/two_triggers/joy_changed"/>
+      </node>
+
+      <arg name="config_F710_right_side" default="$(find wolverine_control)/config/right_side_teleop_$(arg joy_config).yaml" />
+      <!-- <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen" ns="right_side"> -->
+      <!-- <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen" ns="left_side">
+        <rosparam command="load" file="$(arg config_F710_right_side)" />
+        <remap from="joy" to="/joy_changed"/>
+      </node> -->
+      <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node" output="screen" ns="right_side">
+        <rosparam command="load" file="$(arg config_F710_right_side)" />
+        <remap from="joy" to="/two_triggers/joy_changed"/>
+      </node>
+    </group>
+
+</launch>

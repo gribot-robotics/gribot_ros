@@ -1,0 +1,23 @@
+<launch>
+    <!--Arguments for launching the nodes-->
+    <arg name="bag_dir" default="$(optenv WOLVERINE_BAG_DIR)"/>
+    <arg name="record_laser" default="false"/>
+    <arg name="record_diagnostics" default="false"/>
+    <arg name="monitor_wifi" default="false"/>
+    <!--Bag all of the data-->
+    
+    <!--Launch network_monitor_udp if requested in args-->
+    <group if="$(arg monitor_wifi)">
+	    <include file="$(find wolverine_base)/launch/mon_udp.launch"/>
+    </group>
+
+    <node name="rosbag_record_all" pkg="rosbag" type="record" args="-O $(arg bag_dir) -a -x '/rgb_camera.*/image($|_color|_mono)'"/>
+
+    <!-- TODO: User regex to not hardcode all the topic names -->
+    <!-- <node name="rosbag_record_diag" pkg="rosbag" type="record" args="record -O $(arg bag_dir) /odrive/front/left_temp /odrive/front/right_temp /odrive/back/left_temp /odrive/back/right_temp /odrive/front/left_current /odrive/front/right_current /odrive/back/left_current /odrive/back/right_current /odrive/front/raw_odom/left_vel /odrive/front/raw_odom/right_vel /odrive/back/raw_odom/left_vel /odrive/back/raw_odom/right_vel /cmd_vel" if="$(arg record_diagnostics)"/> -->
+    <!--Bag all of the data except the laser scan-->
+    <!-- <node name="rosbag_record_laser" pkg="rosbag" type="record" args="record -O $(arg bag_dir) pf_driver/scan_0 pf_driver/scan_1 pf_driver/scan_2 pf_driver/scan_3" if="$(arg record_laser)"/> -->
+    <!-- <group unless="$(arg bag_laser)">
+        <node name="bag" pkg="rosbag" type="record" args="-O $(arg bag_dir) -a -x /scan" if="$(arg record_hrpsys)"/>
+    </group> -->
+</launch>

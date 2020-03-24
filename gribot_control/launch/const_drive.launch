@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find wolverine_control)/launch/simple_drive.launch" />
+    <node pkg="odrive_ros" name="const_drive" type="const_vel_joy.py" output="screen" />
+</launch>

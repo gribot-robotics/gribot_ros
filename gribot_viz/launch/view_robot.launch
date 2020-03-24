@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<arg name="rvizconfig" default="$(find wolverine_viz)/rviz/robot_orchard.rviz" />
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" output="screen"/>
+</launch>

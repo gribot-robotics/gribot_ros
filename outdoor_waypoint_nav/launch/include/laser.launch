@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<launch>   
+
+  <arg name="R2000_ip" default="10.0.10.9"/>
+
+  <include file="$(find pepperl_fuchs_r2000)/launch/r2000.launch">
+    <arg name="scanner_ip" value="$(arg R2000_ip)"/>
+    <arg name="frame_id" default="/scan"/>
+    <arg name="scan_frequency" default="35"/>
+    <arg name="samples_per_scan" default="3600"/>
+    <!-- <remap from="/scan" to="/scan_unfiltered" /> -->
+  </include>
+
+  <!-- Launch laser scan filters to remove unwanted scan measurements -->
+  <!-- <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="bounding_box_filter">
+    <rosparam command="load" file="$(find outdoor_waypoint_nav)/params/bounding_box_filter.yaml" />
+    <remap from="/scan" to="/scan_unfiltered" />
+    <remap from="/scan_filtered" to="/scan" />
+  </node> -->
+
+  <!-- creating bounding box around robot -->
+  <!-- <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="bounding_box_filter">
+    <rosparam command="load" file="$(find outdoor_waypoint_nav)/params/bounding_box_filter.yaml" />
+    <remap from="/scan" to="/scan_unfiltered" />
+    <remap from="/scan_filtered" to="/scan" /> -->
+
+        <!-- change to this if using range filter as well 
+      	<remap from="/scan_filtered" to="/scan_filtered_bb" />
+      -->
+    <!-- </node> -->
+
+    <!-- Filtering out long range scans (we do not need them) -->   
+      <!-- filtering from gmapping launch file instead
+      <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="range_filter">
+        <rosparam command="load" file="$(find outdoor_waypoint_nav)/params/range_filter.yaml" />
+        <remap from="/scan" to="/scan_filtered_bb" />
+        <remap from="/scan_filtered" to="/scan" />
+      </node>
+    -->
+  </launch>
