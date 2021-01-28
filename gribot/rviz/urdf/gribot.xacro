@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="gribot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-   <xacro:include filename="$(find gribot)/urdf/wheel.urdf.xacro" />
+   <xacro:include filename="$(find gribot)/rviz/urdf/wheel.urdf.xacro" />
 
 
    <!-- Defining the colors used in this robot -->

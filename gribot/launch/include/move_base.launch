@@ -15,7 +15,7 @@
       <rosparam file="$(find gribot)/config/move_base/costmap_common_params.yaml" command="load" ns="global_costmap" />
       
       <!-- Common parameters of local costmap -->
-      <rosparam file="$(find gribot)config/move_base/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find gribot)/config/move_base/costmap_common_params.yaml" command="load" ns="local_costmap" />
       
       <!-- Local costmap parameters -->
       <rosparam file="$(find gribot)/config/move_base/local_costmap_params.yaml" command="load" />

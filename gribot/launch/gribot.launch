@@ -30,7 +30,7 @@
 
    <!-- Load robot description on Parameter Server -->
 
-   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/urdf/gribot.xacro" >
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/rviz/urdf/gribot.xacro" >
     <arg name="load_robot_description" value="true"/>
    </param>
    <param name="use_gui" value="$(arg gui)" />
@@ -69,7 +69,7 @@
 
    <!-- Start rviz -->
 
-   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/urdf/urdf.rviz" required="true" clear_params="true" />
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gribot)/rviz/urdf.rviz" required="true" clear_params="true" />
 
 
    <!-- Start robot state publisher: publish the state of the robot -->
@@ -88,7 +88,7 @@
    <!-- Start CANOpen nodes for controlling motors -->
 
 <!--   <node name="driver" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix=""> -->
-<!--      <rosparam command="load" file="$(find gribot)/config/can0.yaml" /> -->
+<!--      <rosparam command="load" file="$(find gribot)/config/can/can0.yaml" /> -->
 <!--   </node> -->
 
    <!-- Start map server -->
