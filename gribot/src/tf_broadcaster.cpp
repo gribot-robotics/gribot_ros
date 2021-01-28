@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include <ros/ros.h>
 #include <tf/transform_broadcaster.h>
 
@@ -25,22 +24,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // @todo implement broadcaster
 int main(int argc, char** argv)
 {
-   ros::init(argc, argv, "tf_publisher");
-   ros::NodeHandle n;
+  ros::init(argc, argv, "tf_publisher");
+  ros::NodeHandle n;
 
-   ros::Rate r(100);
+  ros::Rate r(100);
 
-   tf::TransformBroadcaster broadcaster;
+  tf::TransformBroadcaster broadcaster;
 
+  ROS_INFO("Starting tf_publisher");
 
-   ROS_INFO("Starting tf_publisher");
+  while (n.ok())
+  {
+  }
 
-
-   while(n.ok())
-   {
-   }
-
-   ROS_WARN("tf_publisher stopped");
-   exit(0);
+  ROS_WARN("tf_publisher stopped");
+  exit(0);
 }
-

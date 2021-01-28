@@ -20,62 +20,54 @@ This node transforms tele operating commands comming from a joystick
 into cmd_vel command
 */
 
-
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include <iostream>
 
-using namespace std;
-
-
 /* Handling tele operation commands */
-
 class TeleopJoy
 {
-   public:
-      TeleopJoy();
+public:
+  TeleopJoy();
 
-   private:
-      void callBack(const sensor_msgs::Joy::ConstPtr& joy);
-      ros::NodeHandle n;
-      ros::Publisher  pub;		// Publisher of cmd_vel 
-      ros::Subscriber sub;		// Subscriber to joy sensor 
-      int i_velLinear, i_velAngular;
+private:
+  void callBack(const sensor_msgs::Joy::ConstPtr& joy);
+  ros::NodeHandle n_;
+  ros::Publisher pub_;   // Publisher of cmd_vel
+  ros::Subscriber sub_;  // Subscriber to joy sensor
+  int i_velLinear_;
+  int i_velAngular_;
 };
-
 
 /*! The constructor */
 
 TeleopJoy::TeleopJoy()
 {
-   n.param("axis_linear", i_velLinear, i_velLinear);		// From parameter server
-   n.param("axix_angular", i_velAngular, i_velAngular); 	// From parameter server
-   pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 1);	// Published
-   sub = n.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopJoy::callBack, this); // Subscribed 
+  n_.param("axis_linear", i_velLinear_, i_velLinear_);                           // From parameter server
+  n_.param("axix_angular", i_velAngular_, i_velAngular_);                        // From parameter server
+  pub_ = n_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);                      // Published
+  sub_ = n_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopJoy::callBack, this);  // Subscribed
 }
-
 
 /*! Called each time a message is received */
 
 void TeleopJoy::callBack(const sensor_msgs::Joy::ConstPtr& joy)
 {
-   geometry_msgs::Twist vel;					// Used to publish data
-   vel.angular.z = 2*joy->axes[i_velAngular];  // Factor 2 required to increase angular speed
-   vel.linear.x = 1*joy->axes[i_velLinear];
-   pub.publish(vel);							// The topic is published
+  geometry_msgs::Twist vel;                      // Used to publish data
+  vel.angular.z = 2 * joy->axes[i_velAngular_];  // Factor 2 required to increase angular speed
+  vel.linear.x = joy->axes[i_velLinear_];
+  pub_.publish(vel);  // The topic is published
 }
 
-
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
+  ROS_INFO("Starting teleopjoy");
+  ros::init(argc, argv, "teleopjoy");
+  TeleopJoy teleop_gribot;
+  ros::spin();
 
-   ROS_INFO("Starting teleopjoy");
-   ros::init(argc, argv, "teleopjoy");
-   TeleopJoy teleop_gribot;
-   ros::spin();
-
-   // We should never reach this, except if roscore stop.
-   ROS_WARN("Stopping teleopjoy");
-   return 0;
+  // We should never reach this, except if roscore stop.
+  ROS_WARN("Stopping teleopjoy");
+  return 0;
 }

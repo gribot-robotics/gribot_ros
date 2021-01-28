@@ -12,7 +12,7 @@
    <arg name="gui"          default="true" />
    <arg name="headless"     default="false" />
    <arg name="debug"        default="false" />
-   
+
    <master auto="start" />
 
 
@@ -41,13 +41,13 @@
 
    <param name="axis_linear" value="1" type="int" />
    <param name="axis_angular" value="0" type="int" />
-   
-   
+
+
    <!-- Start the joystick nodes -->
 
-   <!-- <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" > 
-      <param name="dev" type="string" value="/dev/input/js0" /> 
-      <param name="deadzone" value="0.12" /> 
+   <!-- <node name="joystick" pkg="joy" type="joy_node" output="screen" respawn="true" >
+      <param name="dev" type="string" value="/dev/input/js0" />
+      <param name="deadzone" value="0.12" />
    </node>  -->
 
 
@@ -57,14 +57,14 @@
       <param name="dev" type="string" value="/dev/input/js0" />
       <param name="deadzone" value="0.12" />
    </node> -->
-   
-   <node name="key_teleop" pkg="key_teleop" type="key_teleop" output="screen">
+
+   <node name="key_teleop" pkg="key_teleop" type="key_teleop.py" output="screen">
       <remap from="key_vel" to="cmd_vel"/>
    </node>
 
    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
 
-   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" /> 
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model gribot -param robot_description" />
 
 
    <!-- Start rviz -->
@@ -75,12 +75,12 @@
    <!-- Start robot state publisher: publish the state of the robot -->
    <!-- publish tf between links -->
 
-   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"> 
-      <param name="publish_frequency" type="double" value="50.0" /> 
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
       <param name="use_tf_static" value="true" />
-   </node> 
-   
-   
+   </node>
+
+
    <!-- Start the robot joint state publisher -->
    <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 
@@ -92,23 +92,23 @@
 <!--   </node> -->
 
    <!-- Start map server -->
-   
+
    <include file="$(find gribot)/launch/include/map_server.launch" />
-   
-   
+
+
    <!-- Start gmapping -->
-   
+
    <!-- <include file="$(find gribot)/launch/include/slam_gmapping.launch" /> -->
 
 
    <!-- Start move_base -->
-   
+
    <include file="$(find gribot)/launch/include/move_base.launch" />
-   
-   
+
+
    <!-- Start amcl -->
-   
+
    <include file="$(find gribot)/launch/include/amcl.launch" />
-   
-   
+
+
 </launch>
