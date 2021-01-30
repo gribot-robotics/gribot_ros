@@ -30,7 +30,7 @@
 
    <!-- Load robot description on Parameter Server -->
 
-   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/rviz/urdf/gribot.xacro" >
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find gribot)/urdf/gribot.xacro" >
     <arg name="load_robot_description" value="true"/>
    </param>
    <param name="use_gui" value="$(arg gui)" />

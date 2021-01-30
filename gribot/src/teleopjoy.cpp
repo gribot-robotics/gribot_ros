@@ -25,7 +25,9 @@ into cmd_vel command
 #include <sensor_msgs/Joy.h>
 #include <iostream>
 
-/* Handling tele operation commands */
+/*!
+ * Handling tele operation commands
+ */
 class TeleopJoy
 {
 public:
@@ -40,8 +42,9 @@ private:
   int i_velAngular_;
 };
 
-/*! The constructor */
-
+/*!
+ * Constructor
+ */
 TeleopJoy::TeleopJoy()
 {
   n_.param("axis_linear", i_velLinear_, i_velLinear_);                           // From parameter server
@@ -50,8 +53,10 @@ TeleopJoy::TeleopJoy()
   sub_ = n_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopJoy::callBack, this);  // Subscribed
 }
 
-/*! Called each time a message is received */
-
+/*!
+ * Called each time a message is received
+ * @param joy the received message
+ */
 void TeleopJoy::callBack(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist vel;                      // Used to publish data
@@ -60,6 +65,9 @@ void TeleopJoy::callBack(const sensor_msgs::Joy::ConstPtr& joy)
   pub_.publish(vel);  // The topic is published
 }
 
+/*!
+ * Node initialization
+ */
 int main(int argc, char** argv)
 {
   ROS_INFO("Starting teleopjoy");

@@ -32,19 +32,18 @@ There are plenty of activities in Gribot projecte, such as:
   
   ## Project structure
   
+  - `gribot`: main ROS package
     - **`includes`**: Contains includes files.
     - **`config`**: contains configuration files for the different nodes used by Gribot.
     - **`launch`**: contains gribot lauch files.
     - **`scripts`**: contains scripts used by the different modules. Example: the CANbus starting script.
     - **`src`**: contains Gribot nodes source code files.
+    - **`rviz`**: contains rviz config files.
     - **`urdf`**: contains the robot description files in urdf and/or xacro format.
-    - **`worlds`**: contains different worlds used for simulation. The access path to these worlds has to be configured un Gazebo.
+    - **`worlds`**: contains different worlds used for simulation. The access path to these worlds has to be configured in Gazebo.
     
     
   ## Financial contribution
-  
-
   As a pure community-driven project without major corporate backing, we also welcome financial contributions via <a href="https://gribot.org/support-us/">Gribot WEB site</a>
-
-   
-   All funds will be used exclusively for the development of the [Gribot](https://www.gribot.org) project.
+  
+  All funds will be used exclusively for the development of the [Gribot](https://www.gribot.org) project.
