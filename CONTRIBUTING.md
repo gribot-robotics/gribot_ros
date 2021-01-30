@@ -29,8 +29,14 @@ There are plenty of activities in Gribot projecte, such as:
   - If you are resolving a special issue, add `(fix #xxxx[,#xxx])` (#xxxx is the issue id) in your PR title for a better release log, e.g. `update entities encoding/decoding (fix #3899)`.
   - Provide detailed description of the bug in the PR. Live demo preferred.
   - Add appropriate test coverage if applicable.
+- Please, before creating the pull request, be sure to follow the ROS best practices and formats described in the following resources:
+    - [ROS Best practices](http://wiki.ros.org/BestPractices)
+    - [ROS Developers Guide](http://wiki.ros.org/DevelopersGuide)
+    - [ROS Cpp Style Guide](http://wiki.ros.org/CppStyleGuide), there is also a `.clang-format` file to help with styling.
+    - [Robotics System Lab, at ETH Zurich](https://github.com/leggedrobotics/ros_best_practices/wiki)
+    - and many more in the ROS website.
   
-  ## Project structure
+## Project structure
   
   - `gribot`: main ROS package
     - **`includes`**: Contains includes files.
@@ -42,8 +48,7 @@ There are plenty of activities in Gribot projecte, such as:
     - **`urdf`**: contains the robot description files in urdf and/or xacro format.
     - **`worlds`**: contains different worlds used for simulation. The access path to these worlds has to be configured in Gazebo.
     
-    
-  ## Financial contribution
-  As a pure community-driven project without major corporate backing, we also welcome financial contributions via <a href="https://gribot.org/support-us/">Gribot WEB site</a>
-  
-  All funds will be used exclusively for the development of the [Gribot](https://www.gribot.org) project.
+## Financial contribution
+As a pure community-driven project without major corporate backing, we also welcome financial contributions via <a href="https://gribot.org/support-us/">Gribot WEB site</a>
+
+All funds will be used exclusively for the development of the [Gribot](https://www.gribot.org) project.
