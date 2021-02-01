@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!-- Launch the map server -->
+
+<launch>
+
+   <arg name="map_file" default="$(find gribot)/map/willow.yaml"/>
+   
+   <!-- Run the map server -->
+   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+</launch>
